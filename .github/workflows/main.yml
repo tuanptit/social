@@ -22,19 +22,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-  sent_noti:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send success notification to Slack
-        uses: Ilshidur/action-slack@2.0.2
+      - name: Send GitHub Action trigger data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
         env:
-          SLACK_WEBHOOK: 'https://hooks.slack.com/services/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'
-        with:
-          status: 'Success'
-          fields: |
-            {
-              "Deployment": "Successful",
-              "Commit": "${{ github.sha }}",
-              "Repository": "${{ github.repository }}",
-              "Author": "${{ github.actor }}"
-            }
+          SLACK_WEBHOOK_URL: 'https://hooks.slack.com/services/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'
+
