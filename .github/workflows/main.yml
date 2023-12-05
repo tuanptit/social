@@ -1,4 +1,4 @@
-  name: tuanlv-test
+name: tuanlv-test
 on:
   push:
     branches:
