@@ -28,7 +28,7 @@ jobs:
       - name: Send success notification to Slack
         uses: Ilshidur/action-slack@2.0.2
         env:
-          SLACK_WEBHOOK_URL: 'https://hooks.slack.com/services/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'
+          SLACK_WEBHOOK: 'https://hooks.slack.com/services/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'
         with:
           status: 'Success'
           fields: |
