@@ -22,8 +22,15 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-      - name: Send GitHub Action trigger data to Slack workflow
+      - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
+        with:
+          # This data can be any valid JSON from a previous step in the GitHub Action
+          payload: |
+            {
+              "key": "value",
+              "foo": "bar"
+            }
         env:
           SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
