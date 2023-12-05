@@ -22,9 +22,15 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-      - name: Send GitHub Action trigger data to Slack workflow
+      - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
+        with:
+          # Slack channel id, channel name, or user id to post message.
+          # See also: https://api.slack.com/methods/chat.postMessage#channels
+          # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
+          channel-id: 'C0691B6LFRP'
+          # For posting a simple plain text message
+          slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
         env:
-          SLACK_WEBHOOK_URL: 'https://hooks.slack.com/services/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'
-
+          SLACK_BOT_TOKEN: 'xapp-1-A068NTN8TV0-6288324424102-1a65ed28809af365833bb72585c2b1873a0b19c31bcd59b89e0404e13d6bc29e'
