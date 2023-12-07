@@ -21,4 +21,4 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ls -la
-          ssh -oKexAlgorithms=+diffie-hellman-group1-sha1,ssh-dss,ssh-rsa  -o StrictHostKeyChecking=no -i private_key ec2-user@54.172.252
+          ssh -oKexAlgorithms=diffie-hellman-group1-sha1,ssh-dss,ssh-rsa  -o StrictHostKeyChecking=no -i private_key ec2-user@54.172.252
