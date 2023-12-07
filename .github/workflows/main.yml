@@ -1,29 +1,21 @@
-name: tuanlv-test
+name: Deploy to AWS
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - master
-
+      - "master"
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2 
-      - name: Deploy to Staging server
-        uses: easingthemes/ssh-deploy@main
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Deploy docker image to EC2
+        uses: appleboy/ssh-action@master
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          
-          ARGS: "-rlgoDzvc -i"
-          SCRIPT_BEFORE: |
+          host: ${{ env.HOST }}
+          username: ec2-user
+          key: ${{ env.KEY }}
+          script: |-
+            ls -la
             whoami
-            ls -al
-          SCRIPT_AFTER: |
-            whoami
-            ls -al
