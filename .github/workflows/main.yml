@@ -19,8 +19,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16
-      - name: Install dependencies
-        run: npm install
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: whoami
       - name: Send noti
         uses: 8398a7/action-slack@v3
         with:
