@@ -20,5 +20,5 @@ jobs:
             USER_NAME: ${{secrets.USERNAME}}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          cat private_key
+          ls -la
           ssh private_key ec2-user@54.172.252
