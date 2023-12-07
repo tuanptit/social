@@ -13,12 +13,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2 
-      - name: Build & Deploy
-        env:
-            PRIVATE_KEY: ${{ secrets.KEY }}
-            HOSTNAME: ${{secrets.HOST}}
-            USER_NAME: ${{secrets.USERNAME}}
-        run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ls -la
-          ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss -o PubkeyAcceptedKeyTypes=ssh-rsa -i private_key ec2-user@54.172.252
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          
+          ARGS: "-rlgoDzvc -i"
+          SCRIPT_BEFORE: |
+            whoami
+            ls -al
+          SCRIPT_AFTER: |
+            whoami
+            ls -al
