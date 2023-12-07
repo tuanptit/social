@@ -20,11 +20,9 @@ jobs:
             USER_NAME: ${{secrets.USERNAME}}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-      - name: Send noti
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: always() # Pick up events even if the job fails or is canceled
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+
+          # Now we have got the access of EC2 and we will start the deploy .
+          ls -la
+          whoami
+              '
