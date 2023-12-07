@@ -21,4 +21,4 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ls -la
-          ssh private_key ec2-user@54.172.252
+          ssh -i private_key ec2-user@54.172.252
