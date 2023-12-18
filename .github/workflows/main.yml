@@ -25,8 +25,7 @@ jobs:
           payload: |
             {
               "name": "Rebuild Openedx platform",
-              "status": ${{ job.status }},
-              "author": ${{ github.event.pusher.name }}
+              "status": ${{ job.status }}
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
