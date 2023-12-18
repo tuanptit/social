@@ -17,6 +17,7 @@ jobs:
       - name: test cmd
         run: |
           ls -la
+          xaxa xax
       - name: Send noti
         uses: 8398a7/action-slack@v3
         with:
