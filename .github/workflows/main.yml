@@ -14,16 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2 
-      - name: Build & Deploy
-        env:
-            PRIVATE_KEY: ${{ secrets.KEY }}
-            HOSTNAME: ${{secrets.HOST}}
-            USER_NAME: ${{secrets.USERNAME}}
-        run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
-          ls -la
-          whoami
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
