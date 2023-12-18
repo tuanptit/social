@@ -24,7 +24,7 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "name": "Rebuild Openedx platform"
+              "name": "Rebuild Openedx platform",
               "status": ${{ job.status }},
               "author": ${{ github.event.pusher.name }}
             }
