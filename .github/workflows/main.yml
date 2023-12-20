@@ -1,13 +1,7 @@
 
-name: tuanlv-test
+name: tuanlv-test-manual
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-
+  workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +11,6 @@ jobs:
       - name: test cmd
         run: |
           ls -la
-          xaxa xax
       - name: Send noti
         uses: 8398a7/action-slack@v3
         with:
