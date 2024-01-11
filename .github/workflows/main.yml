@@ -18,13 +18,32 @@ jobs:
           fields: workflow,job,message,commit,repo,ref,author,took
           custom_payload: |
             {
-              username: 'github-action',
-              icon_emoji: ':octocat:',
+              text: "Custom Field Check",
               attachments: [{
-                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `${process.env.AS_AUTHOR.split(/[<@]/)[1]} Deploy Openedx "${process.env.AS_MESSAGE}" in ${process.env.AS_REF.replace('refs/heads/', '')} ${'${{ job.status }}' === 'success' ? 'succeeded' : '${{ job.status }}' === 'failure' ? 'failed' : '${{ job.status }}'} in ${process.env.AS_TOOK}`,
+                "author_name": "8398a7@action-slack", // json
+                fallback: 'fallback',
+                color: 'good',
+                title: 'CI Result',
+                text: 'Succeeded',
+                fields: [{
+                  title: 'lower case',
+                  value: 'LOWER CASE CHECK'.toLowerCase(),
+                  short: true
+                },
+                {
+                  title: 'reverse',
+                  value: 'gnirts esrever'.split('').reverse().join(''),
+                  short: true
+                },
+                {
+                  title: 'long title1',
+                  value: 'long value1',
+                  short: false
+                }],
+                actions: [{
+                }]
               }]
-            }
+            } 
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always() # Pick up events even if the job fails or is canceled.
