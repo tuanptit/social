@@ -18,12 +18,9 @@ jobs:
           fields: workflow,job,message,commit,repo,ref,author,took
           custom_payload: |
             {
-              title: `Deploy in ${process.env.AS_REF.replace('refs/heads/', '')}`,
-              username: 'github-action',
-              icon_emoji: ':octocat:',
               attachments: [{
-                color: 'good',
-                text: `${process.env.AS_AUTHOR.split(/[<@]/)[1]} Start Deploying Openedx... "${process.env.AS_MESSAGE}" in. ${process.env.AS_REF.replace('refs/heads/', '')} ${'${{ job.status }}' === 'success' ? 'succeeded' : '${{ job.status }}' === 'failure' ? 'failed' : '${{ job.status }}'} in ${process.env.AS_TOOK}`,
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR}.bold() ${{ job.status }} in ${process.env.AS_TOOK}`,
               }]
             }
         env:
