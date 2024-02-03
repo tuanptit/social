@@ -12,7 +12,9 @@ pipeline {
         stage('Build') {
             steps {
                 // Your build steps go here
-                bat "aws ecr get-login-password | docker login --username AWS --password-stdin 627554678886.dkr.ecr.eu-west-2.amazonaws.com"
+                sh """
+                    aws sts get-caller-identity
+                """
                 
                 echo 'Building the code...'
             }
