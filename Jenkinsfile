@@ -13,6 +13,7 @@ pipeline {
             steps {
                 // Your build steps go here
                 sh """
+                    whoami
                     aws sts get-caller-identity
                 """
                 
